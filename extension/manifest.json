@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "turbo-dl 发送器",
+  "version": "1.0.0",
+  "description": "一键把网页链接发送到 turbo-dl 下载，并可在弹窗中查看/控制下载任务。",
+  "permissions": ["contextMenus", "storage"],
+  "host_permissions": ["http://127.0.0.1/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "turbo-dl"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

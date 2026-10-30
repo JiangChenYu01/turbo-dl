@@ -1,0 +1,52 @@
+[package]
+name = "turbo-dl"
+version = "0.2.0"
+edition = "2021"
+description = "超越 IDM 的 Rust 下载器：图形界面、work-stealing 带宽抢占、HTTP/FTP/BT 多协议、断点续传、限速、校验"
+license = "MIT"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "http2", "socks", "stream", "json"] }
+clap = { version = "4", features = ["derive", "wrap_help"] }
+indicatif = "0.17"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+sha2 = "0.10"
+sha1 = "0.10"
+md-5 = "0.10"
+hex = "0.4"
+url = "2"
+futures-util = "0.3"
+eframe = "0.29"
+egui_extras = "0.29"
+suppaftp = "5"
+librqbit = { version = "9", default-features = false, features = ["rust-tls"] }
+# 统一使用 ring 作为 TLS 加密后端：aws-lc-rs 在 Windows 上需要 NASM/CMake，
+# 且在本机构建失败（missing DEP_AWS_LC_ include）。ring 无需外部工具链。
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+rfd = "0.15"
+dirs = "5"
+arboard = "3"
+chrono = "0.4"
+base64 = "0.22"
+git2 = { version = "0.19", features = ["vendored-libgit2"] }
+scraper = "0.20"
+zip = "2"
+flate2 = "1"
+tar = "0.4"
+bytes = "1"
+rss = "2"
+atom_syndication = "0.2"
+getrandom = "0.2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+aes = "0.8"
+cbc = "0.1"
+
+[profile.release]
+# 不使用 LTO：某些依赖（如 windows-sys 全特性）在 LTO + codegen-units=1 下
+# 会触发 rustc 栈溢出崩溃（STATUS_STACK_BUFFER_OVERRUN）。下载器是 I/O 密集，
+# 移除 LTO 对性能影响可忽略，但能保证任何机器上 `cargo build --release` 稳定成功。
+opt-level = 3

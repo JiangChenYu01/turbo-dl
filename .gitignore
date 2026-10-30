@@ -1,0 +1,17 @@
+# 构建产物
+/target
+
+# 开发备份（大量迭代快照，不上传）
+/backups/
+
+# 测试大二进制
+/testdata/*.bin
+
+# 运行期生成
+*.rdmeta
+*.lock
+*.log
+
+# 系统文件
+.DS_Store
+Thumbs.db

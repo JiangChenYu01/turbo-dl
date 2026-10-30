@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>turbo-dl</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      width: 340px;
+      margin: 0;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+    .row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    input, button {
+      font-size: 13px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      border: 1px solid #888;
+    }
+    input {
+      flex: 1;
+      min-width: 0;
+    }
+    #port { flex: 0 0 64px; }
+    button {
+      cursor: pointer;
+      background: #1e78d8;
+      color: #fff;
+      border-color: #1e78d8;
+    }
+    button:hover { background: #1664b5; }
+    ul#tasks {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    li {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 6px;
+      margin-bottom: 6px;
+    }
+    .name {
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .meta { color: #666; margin: 2px 0; }
+    .bar {
+      height: 5px;
+      background: #eee;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 4px 0;
+    }
+    .fill { height: 100%; background: #1e78d8; }
+    .actions button {
+      font-size: 12px;
+      padding: 2px 6px;
+      margin-right: 4px;
+      background: #444;
+      border-color: #444;
+    }
+    .actions button:hover { background: #333; }
+    #status { margin-top: 6px; color: #1a7f37; min-height: 16px; }
+    .err { color: #d33; }
+  </style>
+</head>
+<body>
+  <h3>🚀 turbo-dl</h3>
+  <div class="row">
+    <input id="port" type="number" placeholder="端口" title="turbo-dl 本地服务端口（默认 31877）" />
+    <input id="token" type="password" placeholder="token（从 turbo-dl 日志获取）" />
+    <button id="save">保存</button>
+  </div>
+  <div class="row">
+    <input id="url" placeholder="粘贴下载链接，回车添加" />
+    <button id="add">添加</button>
+  </div>
+  <ul id="tasks"><li>加载中…</li></ul>
+  <div id="status"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
